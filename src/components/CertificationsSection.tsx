@@ -1,27 +1,31 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Award, ExternalLink, X, Calendar, Building2 } from "lucide-react";
+import { Award, ExternalLink, X, Calendar, Building2, Clock } from "lucide-react";
 
 const certifications = [
   {
     id: 1,
-    title: "AI Prompt Engineering Workshop",
-    issuer: "SIN School of AI",
-    date: "2024",
-    description: "Comprehensive training in prompt engineering techniques, LLM optimization, and AI-assisted development workflows.",
-    image: "/certificates/prompt-engineering.jpg",
-    skills: ["Prompt Design", "LLMs", "AI Workflows"],
+    title: "Ethical Hacking & Cybersecurity Workshop",
+    issuer: "NullCyberX",
+    date: "8 June 2024",
+    duration: "45 Hours",
+    description: "Intensive hands-on training in cybersecurity fundamentals, penetration testing, network security, and ethical hacking methodologies. Certified by Mohit Sharma, Founder of NullCyberX.",
+    image: "/certificates/ethical-hacking.jpg",
+    skills: ["Penetration Testing", "Cybersecurity", "Network Analysis", "Ethical Hacking"],
+    hasImage: true,
   },
   {
     id: 2,
-    title: "Ethical Hacking Workshop",
-    issuer: "NullCyberX",
-    date: "2024",
-    duration: "45 Hours",
-    description: "Intensive hands-on training in cybersecurity fundamentals, penetration testing, and ethical hacking methodologies.",
-    image: "/certificates/ethical-hacking.jpg",
-    skills: ["Penetration Testing", "Security", "Network Analysis"],
+    title: "AI Prompt Engineering Workshop",
+    issuer: "SIN School of AI",
+    date: "2025 (Ongoing)",
+    duration: "Live Workshop",
+    description: "Comprehensive training in prompt engineering techniques, LLM optimization, ML concepts, prompt design, and AI-assisted development workflows. Currently in progress.",
+    image: null,
+    skills: ["Prompt Design", "LLMs", "AI Workflows", "Machine Learning"],
+    hasImage: false,
+    status: "In Progress",
   },
 ];
 
@@ -70,12 +74,25 @@ const CertificationsSection = () => {
               >
                 {/* Certificate Preview */}
                 <div className="relative aspect-[4/3] mb-6 rounded-xl overflow-hidden bg-secondary/50">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Award className="w-16 h-16 text-primary/20" />
-                  </div>
+                  {cert.hasImage && cert.image ? (
+                    <img 
+                      src={cert.image} 
+                      alt={cert.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Award className="w-16 h-16 text-primary/20" />
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
                     <span className="text-xs text-accent font-medium">{cert.issuer}</span>
+                    {cert.status && (
+                      <span className="px-2 py-1 text-xs rounded-full bg-accent/20 text-accent">
+                        {cert.status}
+                      </span>
+                    )}
                   </div>
                   <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                     <ExternalLink className="w-5 h-5 text-primary" />
@@ -87,7 +104,7 @@ const CertificationsSection = () => {
                   {cert.title}
                 </h3>
                 
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
                   <span className="flex items-center gap-1">
                     <Building2 className="w-4 h-4" />
                     {cert.issuer}
@@ -96,6 +113,12 @@ const CertificationsSection = () => {
                     <Calendar className="w-4 h-4" />
                     {cert.date}
                   </span>
+                  {cert.duration && (
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      {cert.duration}
+                    </span>
+                  )}
                 </div>
 
                 <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
@@ -132,13 +155,16 @@ const CertificationsSection = () => {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="glass-card p-6 max-w-2xl w-full max-h-[90vh] overflow-auto"
+            className="glass-card p-6 max-w-3xl w-full max-h-[90vh] overflow-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between mb-6">
               <div>
                 <h3 className="font-heading font-bold text-2xl mb-1">{selectedCert.title}</h3>
-                <p className="text-muted-foreground">{selectedCert.issuer} • {selectedCert.date}</p>
+                <p className="text-muted-foreground">
+                  {selectedCert.issuer} • {selectedCert.date}
+                  {selectedCert.duration && ` • ${selectedCert.duration}`}
+                </p>
               </div>
               <button
                 onClick={() => setSelectedCert(null)}
@@ -148,8 +174,19 @@ const CertificationsSection = () => {
               </button>
             </div>
 
-            <div className="aspect-[4/3] rounded-xl overflow-hidden bg-secondary/50 mb-6 flex items-center justify-center">
-              <Award className="w-24 h-24 text-primary/30" />
+            <div className="aspect-[4/3] rounded-xl overflow-hidden bg-secondary/50 mb-6">
+              {selectedCert.hasImage && selectedCert.image ? (
+                <img 
+                  src={selectedCert.image} 
+                  alt={selectedCert.title}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center flex-col gap-4">
+                  <Award className="w-24 h-24 text-primary/30" />
+                  <span className="text-muted-foreground">Certificate in progress</span>
+                </div>
+              )}
             </div>
 
             <p className="text-muted-foreground mb-6">{selectedCert.description}</p>

@@ -4,10 +4,11 @@ import { Menu, X, Github, Linkedin, Mail, FileText, Link2, Instagram } from "luc
 import ThemeSwitcher from "./ThemeSwitcher";
 
 const navLinks = [
+  { name: "Home", href: "#" },
   { name: "About", href: "#about" },
+  { name: "Journey", href: "#experience" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
-  { name: "Experience", href: "#experience" },
   { name: "Certifications", href: "#certifications" },
   { name: "Contact", href: "#contact" },
 ];
@@ -56,12 +57,12 @@ const Navbar = () => {
           </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="nav-link font-medium"
+                className="nav-link font-medium text-sm"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -72,9 +73,9 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Social Icons + Theme + CTA */}
-          <div className="hidden md:flex items-center gap-2">
-            {socialLinks.slice(0, 3).map((social, index) => (
+          {/* Social Icons + Theme + Resume + CTA */}
+          <div className="hidden lg:flex items-center gap-2">
+            {socialLinks.slice(0, 2).map((social, index) => (
               <motion.a
                 key={social.label}
                 href={social.href}
@@ -87,6 +88,16 @@ const Navbar = () => {
                 <social.icon className="w-5 h-5 text-muted-foreground hover:text-foreground" />
               </motion.a>
             ))}
+            <motion.a
+              href="/Nitin_Daswani_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-lg hover:bg-white/5 transition-colors"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <FileText className="w-5 h-5 text-muted-foreground hover:text-foreground" />
+            </motion.a>
             <ThemeSwitcher />
             <motion.a
               href="#contact"
@@ -100,7 +111,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden p-2 rounded-lg hover:bg-white/5"
+            className="lg:hidden p-2 rounded-lg hover:bg-white/5"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             whileTap={{ scale: 0.9 }}
           >
@@ -120,23 +131,36 @@ const Navbar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden mt-4 pb-4 border-t border-white/5"
+              className="lg:hidden mt-4 pb-4 border-t border-white/5"
             >
-              <div className="flex flex-col gap-4 pt-4">
+              <div className="flex flex-col gap-2 pt-4">
                 {navLinks.map((link, index) => (
                   <motion.a
                     key={link.name}
                     href={link.href}
-                    className="nav-link font-medium py-2"
+                    className="nav-link font-medium py-3 px-4 rounded-lg hover:bg-white/5"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.name}
                   </motion.a>
                 ))}
-                <div className="flex items-center gap-3 pt-4 border-t border-white/5">
+                <motion.a
+                  href="/Nitin_Daswani_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="nav-link font-medium py-3 px-4 rounded-lg hover:bg-white/5 flex items-center gap-2"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navLinks.length * 0.05 }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <FileText className="w-4 h-4" />
+                  Resume
+                </motion.a>
+                <div className="flex items-center gap-3 pt-4 mt-2 border-t border-white/5 px-4">
                   {socialLinks.map((social) => (
                     <a
                       key={social.label}
@@ -154,6 +178,9 @@ const Navbar = () => {
                   >
                     <Mail className="w-5 h-5" />
                   </a>
+                  <div className="ml-auto">
+                    <ThemeSwitcher />
+                  </div>
                 </div>
               </div>
             </motion.div>

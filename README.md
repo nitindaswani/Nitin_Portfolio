@@ -1,137 +1,73 @@
-# 🌟 Nitin Portfolio — Modern Personal Portfolio Website
+# Welcome to your Lovable project
 
-A sleek, fast, and professional portfolio website built to showcase skills, projects, achievements, and my growth in the tech ecosystem. Designed with modern UI/UX principles, smooth animations, responsive layouts, and a developer-first approach.
+## Project info
 
----
+**URL**: https://lovable.dev/projects/8927cc77-c4b2-44bd-b1be-3b90ee2eeab9
 
-## 🚀 Overview
+## How can I edit this code?
 
-**Nitin_Portfolio** is a fully responsive personal portfolio website created to make a strong professional impact. It highlights expertise, projects, technical skills, and learning goals in the most interactive and visually impressive way.
+There are several ways of editing your application.
 
-This portfolio reflects:
-✨ Clean design principles
-✨ Premium user experience
-✨ Modern frontend practices
-✨ Performance-optimized development
+**Use Lovable**
 
----
+Simply visit the [Lovable Project](https://lovable.dev/projects/8927cc77-c4b2-44bd-b1be-3b90ee2eeab9) and start prompting.
 
-## 🧩 Tech Stack
+Changes made via Lovable will be committed automatically to this repo.
 
-Built using cutting-edge and developer-friendly technologies:
+**Use your preferred IDE**
 
-* ⚡ **Vite** — Ultra-fast build tool
-* 🟦 **TypeScript** — Type-safe and scalable JavaScript
-* 🎨 **Tailwind CSS** — Beautiful and responsive styling
-* 💻 **HTML / CSS** — Core web foundations
-* 🔧 Additional configurations for a smooth development workflow
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
----
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-## 📁 Project Structure
+Follow these steps:
 
-```
-Nitin_Portfolio
-├── public/              # Static assets (logos, images)
-├── src/                 # Components, pages, styles
-├── package.json         # Dependencies & scripts
-├── tailwind.config.ts   # Tailwind customization
-├── vite.config.ts       # Build & dev config
-└── README.md            # You're reading this 😄
-```
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
----
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
-## 🛠️ Installation & Setup
+# Step 3: Install the necessary dependencies.
+npm i
 
-Follow these steps to run the project locally:
-
-### 1️⃣ Clone the Repository
-
-```
-git clone https://github.com/nitindaswani/Nitin_Portfolio.git
-```
-
-### 2️⃣ Navigate into the Project
-
-```
-cd Nitin_Portfolio
-```
-
-### 3️⃣ Install Dependencies
-
-```
-npm install
-# or
-yarn install
-```
-
-### 4️⃣ Run the Development Server
-
-```
+# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
-# or
-yarn dev
 ```
 
-Your project will be live at **[http://localhost:3000/](http://localhost:3000/)** (or as specified in terminal).
+**Edit a file directly in GitHub**
 
----
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-## 📦 Build for Production
+**Use GitHub Codespaces**
 
-```
-npm run build
-```
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-This generates an optimized build ready for deployment.
+## What technologies are used for this project?
 
-Perfect for hosting on:
-🌐 GitHub Pages
-🚀 Vercel
-⚡ Netlify
-🟢 Render
+This project is built with:
 
----
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-## ✨ Features
+## How can I deploy this project?
 
-* **Modern & Minimal UI**
-* **Fast Loading & Optimized Performance**
-* **Smooth Animations**
-* **Mobile-First Responsive Design**
-* **Reusable Components**
-* **Easy to Extend & Customize**
-* **Developer-friendly codebase**
+Simply open [Lovable](https://lovable.dev/projects/8927cc77-c4b2-44bd-b1be-3b90ee2eeab9) and click on Share -> Publish.
 
----
+## Can I connect a custom domain to my Lovable project?
 
-## 🔮 Future Enhancements
+Yes, you can!
 
-* Add Dark/Light Theme Toggle
-* Add Blog Section
-* Integrate Project API
-* Add Micro-Interactions for Better UX
-* Add Contact Form Backend
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
----
-
-## 👨‍💻 Author
-
-**Nitin Daswani**
-Full-Stack Developer | Tech Enthusiast | Lifelong Learner
-Always exploring new domains like **AI**, **ML**, and **Data Analysis**.
-
-Connect with me on:
-🌐 GitHub — *[github.com/nitindaswani](https://github.com/nitindaswani)*
-🔗 LinkedIn — *https://www.linkedin.com/in/nitin-daswani-771458339*
-
----
-
-## 📄 License
-
-Open-source. You can use or modify it with credit.
-
----
-
-### ⭐ If you like this project, don't forget to star the repo!
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)

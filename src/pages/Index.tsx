@@ -7,6 +7,7 @@ import ExperienceSection from "@/components/ExperienceSection";
 import AILearningSection from "@/components/AILearningSection";
 import AIPoweredSection from "@/components/AIPoweredSection";
 import CertificationsSection from "@/components/CertificationsSection";
+import StatsSection from "@/components/StatsSection";
 import ContactSection from "@/components/ContactSection";
 import CTAStrip from "@/components/CTAStrip";
 import Footer from "@/components/Footer";
@@ -129,6 +130,7 @@ const Index = () => {
         <AboutSection />
         <SectionDivider flip />
         <SkillsSection />
+        <StatsSection />
         <SectionDivider />
         <ProjectsSection />
         <SectionDivider flip />

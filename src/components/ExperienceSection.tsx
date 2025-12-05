@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Briefcase, GraduationCap, Award, Calendar } from "lucide-react";
+import { Briefcase, GraduationCap, Award, Calendar, Shield } from "lucide-react";
 
 const experiences = [
   {
@@ -14,6 +14,8 @@ const experiences = [
       "Built authentication flows, session management and basic REST endpoints",
       "Developed responsive frontends with HTML5, CSS3 and JavaScript for multiple project prototypes",
       "Used Git/GitHub for version control and collaborative workflows",
+      "Completed Ethical Hacking Workshop (2024) — NullCyberX",
+      "Attending AI Prompt Engineering Workshop (2025 — Ongoing) — SIN School of AI",
     ],
     icon: Briefcase,
   },
@@ -25,7 +27,10 @@ const education = [
     title: "Bachelor of Computer Applications (BCA)",
     organization: "Lucky Institute of Professional Studies, Jodhpur",
     period: "2023 – 2026 (ongoing)",
-    description: ["Pursuing degree with focus on programming, databases, and software development"],
+    description: [
+      "Pursuing degree with focus on programming, databases, and software development",
+      "Completed certifications alongside academic studies: Ethical Hacking (NullCyberX) & AI Prompt Engineering (SIN School of AI)",
+    ],
     icon: GraduationCap,
   },
   {
@@ -41,10 +46,25 @@ const education = [
 const certifications = [
   {
     type: "certification",
+    title: "Ethical Hacking & Cybersecurity Workshop",
+    organization: "NullCyberX",
+    period: "8 June 2024",
+    description: [
+      "45-hour intensive practical cybersecurity training",
+      "Learned penetration testing, network security, and ethical hacking methodologies",
+      "Certificate signed by Mohit Sharma, Founder of NullCyberX",
+    ],
+    icon: Shield,
+  },
+  {
+    type: "certification",
     title: "AI Prompt Engineering Workshop",
     organization: "SIN School of AI",
-    period: "2024",
-    description: ["Practical focus on ML concepts, prompt design, and generative AI applications"],
+    period: "2025 (Ongoing)",
+    description: [
+      "Practical focus on ML concepts, prompt design, and generative AI applications",
+      "Learning LLM optimization and AI-assisted development workflows",
+    ],
     icon: Award,
   },
 ];
@@ -53,7 +73,7 @@ const ExperienceSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const allItems = [...experiences, ...education, ...certifications];
+  const allItems = [...experiences, ...certifications, ...education];
 
   return (
     <section id="experience" className="py-24 relative overflow-hidden" ref={ref}>
@@ -93,8 +113,12 @@ const ExperienceSection = () => {
                 className="relative pl-20 pb-12 last:pb-0"
               >
                 {/* Icon */}
-                <div className="absolute left-0 w-16 h-16 rounded-2xl glass-card flex items-center justify-center border border-primary/20">
-                  <item.icon className="w-7 h-7 text-primary" />
+                <div className={`absolute left-0 w-16 h-16 rounded-2xl glass-card flex items-center justify-center border ${
+                  item.type === "certification" ? "border-green-500/30" : "border-primary/20"
+                }`}>
+                  <item.icon className={`w-7 h-7 ${
+                    item.type === "certification" ? "text-green-400" : "text-primary"
+                  }`} />
                 </div>
 
                 {/* Content Card */}
@@ -124,7 +148,9 @@ const ExperienceSection = () => {
                   <ul className="space-y-2">
                     {item.description.map((desc, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                        <span className={`w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 ${
+                          item.type === "certification" ? "bg-green-400" : "bg-primary"
+                        }`} />
                         {desc}
                       </li>
                     ))}

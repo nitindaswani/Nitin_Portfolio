@@ -30,7 +30,7 @@ const LoadingScreen = () => {
             >
               {/* Glowing Ring */}
               <motion.div
-                className="absolute inset-0 w-24 h-24 mx-auto rounded-full"
+                className="absolute -inset-4 rounded-full opacity-50"
                 style={{
                   background: "conic-gradient(from 0deg, hsl(217 99% 61%), hsl(199 89% 74%), hsl(217 99% 61%))",
                 }}
@@ -38,16 +38,21 @@ const LoadingScreen = () => {
                 transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
               />
 
-              {/* Inner Circle */}
-              <div className="relative w-24 h-24 mx-auto rounded-full bg-background flex items-center justify-center m-1">
-                <motion.span
-                  className="text-3xl font-heading font-bold gradient-text"
+              {/* Inner Container */}
+              <div className="relative px-8 py-4 rounded-2xl bg-background flex items-center justify-center">
+                <motion.div
+                  className="text-center"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                 >
-                  ND
-                </motion.span>
+                  <span className="text-2xl md:text-3xl font-heading font-bold gradient-text block">
+                    Nitin Daswani
+                  </span>
+                  <span className="text-xs text-muted-foreground mt-1 block">
+                    Python & Django Developer
+                  </span>
+                </motion.div>
               </div>
             </motion.div>
 
@@ -56,7 +61,7 @@ const LoadingScreen = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="mt-6 text-muted-foreground text-sm"
+              className="mt-8 text-muted-foreground text-sm"
             >
               Loading portfolio...
             </motion.p>

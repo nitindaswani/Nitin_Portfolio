@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram, Link2, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Instagram, Link2, Loader2, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from "@emailjs/browser";
 
 const contactInfo = [
   {
@@ -45,46 +44,42 @@ const ContactSection = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // EmailJS configuration - using public form submission
-      // For production, set up EmailJS account and add environment variables
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_email: "nitindaswani771@gmail.com",
-      };
+      // Using FormSubmit.co
+      const response = await fetch("https://formsubmit.co/ajax/nitindaswani771@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _subject: `Portfolio Contact: ${formData.subject}`,
+        }),
+      });
 
-      // Try EmailJS if configured, otherwise use mailto fallback
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-      if (serviceId && templateId && publicKey) {
-        await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      if (response.ok) {
+        setIsSuccess(true);
         toast({
-          title: "Message Sent! ✨",
+          title: "Message Sent Successfully! ✨",
           description: "Thank you for reaching out. I'll get back to you soon!",
         });
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setIsSuccess(false), 3000);
       } else {
-        // Fallback: Open mailto link
-        const mailtoLink = `mailto:nitindaswani771@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`;
-        window.open(mailtoLink, "_blank");
-        toast({
-          title: "Opening Email Client",
-          description: "Your default email client will open with the message details.",
-        });
+        throw new Error("Failed to send");
       }
-
-      setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
-      console.error("Email error:", error);
+      console.error("Form submission error:", error);
       toast({
         title: "Error Sending Message",
         description: "Please try again or email me directly at nitindaswani771@gmail.com",
@@ -192,6 +187,10 @@ const ContactSection = () => {
             transition={{ delay: 0.3 }}
           >
             <form ref={formRef} onSubmit={handleSubmit} className="glass-card p-8 space-y-6">
+              {/* Hidden anti-bot field */}
+              <input type="text" name="_honey" style={{ display: "none" }} />
+              <input type="hidden" name="_captcha" value="false" />
+              
               <div className="grid sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -200,7 +199,7 @@ const ContactSection = () => {
                   <input
                     type="text"
                     id="name"
-                    name="from_name"
+                    name="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
@@ -215,7 +214,7 @@ const ContactSection = () => {
                   <input
                     type="email"
                     id="email"
-                    name="from_email"
+                    name="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
@@ -237,7 +236,7 @@ const ContactSection = () => {
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   required
                   className="w-full px-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
-                  placeholder="Project Inquiry"
+                  placeholder="Project Inquiry / Job Opportunity / Collaboration"
                 />
               </div>
 
@@ -253,13 +252,13 @@ const ContactSection = () => {
                   required
                   rows={5}
                   className="w-full px-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
-                  placeholder="Tell me about your project..."
+                  placeholder="Tell me about your project or opportunity..."
                 />
               </div>
 
               <motion.button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || isSuccess}
                 className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-50"
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
@@ -269,6 +268,11 @@ const ContactSection = () => {
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
                       Sending...
+                    </>
+                  ) : isSuccess ? (
+                    <>
+                      <CheckCircle className="w-4 h-4" />
+                      Message Sent!
                     </>
                   ) : (
                     <>

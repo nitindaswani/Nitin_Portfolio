@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, FileText, Sparkles, Download, Instagram, Link2 } from "lucide-react";
+import { ArrowDown, Github, Linkedin, FileText, Sparkles, Download, Instagram, Link2, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 import ResumeModal from "./ResumeModal";
@@ -165,6 +165,17 @@ const HeroSection = () => {
             >
               <span className="relative z-10">Hire Me</span>
             </motion.a>
+            <motion.a
+              href="/Nitin_Daswani_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ExternalLink className="w-4 h-4" />
+              View Resume
+            </motion.a>
             <motion.button
               onClick={() => setIsResumeModalOpen(true)}
               className="btn-outline flex items-center gap-2"
@@ -172,16 +183,8 @@ const HeroSection = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Download className="w-4 h-4" />
-              Download Resume
+              Preview Resume
             </motion.button>
-            <motion.a
-              href="#projects"
-              className="btn-outline flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View Projects
-            </motion.a>
           </motion.div>
 
           {/* Social Links */}
