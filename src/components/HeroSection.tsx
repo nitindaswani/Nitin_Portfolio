@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, FileText, Sparkles, Download, Instagram, Link2, ExternalLink } from "lucide-react";
+import { ArrowDown, Github, Linkedin, FileText, Sparkles, Instagram, Link2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
-import ResumeModal from "./ResumeModal";
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -173,18 +171,9 @@ const HeroSection = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <ExternalLink className="w-4 h-4" />
+              <FileText className="w-4 h-4" />
               View Resume
             </motion.a>
-            <motion.button
-              onClick={() => setIsResumeModalOpen(true)}
-              className="btn-outline flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Download className="w-4 h-4" />
-              Preview Resume
-            </motion.button>
           </motion.div>
 
           {/* Social Links */}
@@ -213,7 +202,7 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        <ResumeModal isOpen={isResumeModalOpen} onClose={() => setIsResumeModalOpen(false)} />
+        
 
         {/* Scroll Indicator */}
         <motion.div
